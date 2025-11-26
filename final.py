@@ -38,7 +38,7 @@ USR1_ZERODHA_API_SECRET = os.getenv("ZERODHA_API_SECRET")
 USR1_ZERODHA_AUTHENTICATOR = os.getenv("ZERODHA_TOTP_SECRET")
 
 MONGO_URI = os.getenv("MONGO_URI")
-MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "")  # default empty if not set
+MONGO_DB_NAME = ""   # default empty if not set
 MONGO_COLLECTION_NAME = "zerodhatokens"
 TOKEN_UPDATED_BY = "aiman.singh30@gmail.com"
 
@@ -268,3 +268,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
