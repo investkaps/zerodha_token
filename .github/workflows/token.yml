@@ -2,8 +2,8 @@ name: Refresh Zerodha Token
 
 on:
   schedule:
-    # Runs every day at 6:00 AM IST (00:30 UTC)
-    - cron: "30 0 * * *"
+   
+    - cron: "0 2 * * *"
   workflow_dispatch: {}   # lets you trigger manually from the GitHub UI
 
 jobs:
