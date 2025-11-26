@@ -1,0 +1,9 @@
+selenium
+pyotp
+kiteconnect
+pymongo
+retrying
+webdriver-manager
+python-dotenv
+PyYAML
+pytz
