@@ -1,0 +1,41 @@
+name: Refresh Zerodha Token
+
+on:
+  schedule:
+   
+    - cron: "0 2 * * *"
+  workflow_dispatch: {}   # lets you trigger manually from the GitHub UI
+
+jobs:
+  refresh-token:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps for Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run token refresher
+        env:
+          ZERODHA_USER_ID: ${{ secrets.ZERODHA_USER_ID }}
+          ZERODHA_PASSWORD: ${{ secrets.ZERODHA_PASSWORD }}
+          ZERODHA_API_KEY: ${{ secrets.ZERODHA_API_KEY }}
+          ZERODHA_API_SECRET: ${{ secrets.ZERODHA_API_SECRET }}
+          ZERODHA_TOTP_SECRET: ${{ secrets.ZERODHA_TOTP_SECRET }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          GITHUB_ACTIONS: "true"
+          CHROME_BIN: "/usr/bin/chromium-browser"
+        run: |
+          python final.py
